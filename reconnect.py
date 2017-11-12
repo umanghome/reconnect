@@ -10,7 +10,7 @@ from email.MIMEText import MIMEText
 
 # Get number of days
 today = datetime.date.today()
-days_in_this_month = calendar.monthrange(today.year, today.day)[1]
+days_in_this_month = calendar.monthrange(today.year, today.month)[1]
 today = today.day - 1
 
 # Fetch people
