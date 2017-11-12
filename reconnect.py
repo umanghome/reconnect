@@ -8,13 +8,15 @@ import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 
+this_dir = os.path.dirname(os.path.abspath(__file__)) + '/'
+
 # Get number of days
 today = datetime.date.today()
 days_in_this_month = calendar.monthrange(today.year, today.month)[1]
 today = today.day - 1
 
 # Fetch people
-people_raw = open('people.json').read()
+people_raw = open(this_dir + 'people.json').read()
 people_parsed = json.loads(people_raw)
 people_parsed = people_parsed['people']
 people_parsed = [p.encode('utf-8') for p in people_parsed]
@@ -38,7 +40,7 @@ if len(people) == 0:
 first_names = [name.split(' ')[0] for name in people]
 
 # Fetch data required to send an email
-dotenv.load_dotenv('.env')
+dotenv.load_dotenv(this_dir + '.env')
 try:
   email_config = {
     'from': os.environ.get('from').encode('utf-8'),
